@@ -1,12 +1,40 @@
+export interface Category {
+  id: string;
+  name: string;
+  description?: string;
+  created_at: string;
+}
+
 export interface Product {
   id: string;
   name: string;
   price: number;
-  category: string;
+  category_id?: string;
+  category?: Category;
   image_url?: string;
   stock: number;
   barcode?: string;
+  cost_price?: number;
   created_at: string;
+  updated_at?: string;
+}
+
+export interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  total: number;
+}
+
+export interface Employee {
+  id: string;
+  name: string;
+  role: string;
+  pin_code: string;
+  active: boolean;
+  created_at: string;
+  updated_at?: string;
 }
 
 export interface Transaction {
@@ -28,12 +56,22 @@ export interface TransactionItem {
   quantity: number;
   price: number;
   subtotal: number;
+  created_at?: string;
 }
 
-export interface Employee {
-  id: string;
-  name: string;
-  role: string;
-  pin_code: string;
-  active: boolean;
+export type PaymentMethod = "cash" | "card" | "ewallet";
+
+export interface PaymentResult {
+  success: boolean;
+  transactionId?: string;
+  message?: string;
+  error?: unknown;
 }
+
+export type Tables = {
+  products: Product;
+  categories: Category;
+  employees: Employee;
+  transactions: Transaction;
+  transaction_items: TransactionItem;
+};
